@@ -4,9 +4,57 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import SplashScreen from "./screens/SplashScreen";
 import HomeScreen from "./screens/HomeScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Notify from "./screens/Notify";
+import AddTaskScreen from "./screens/AddTaskScreen";
+import EditTaskScreen from "./screens/EditTaskScreen";
+import React from "react";
 
 const Stack = createNativeStackNavigator();
+const Tabs = createMaterialBottomTabNavigator();
+
+function TabsNavigation() {
+  return (
+    <Tabs.Navigator>
+      <Tabs.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home" color={"#782DE3"} size={26} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Adicionar Tarefa"
+        component={AddTaskScreen}
+        options={{
+          tabBarLabel: "Adicionar Tarefa",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="bell-alert"
+              color={"#782DE3"}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Editar Tarefa"
+        component={EditTaskScreen}
+        options={{
+          tabBarLabel: "Editar Tarefa",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="bell-alert"
+              color={"#782DE3"}
+              size={26}
+            />
+          ),
+        }}
+      />
+    </Tabs.Navigator>
+  );
+}
 
 export default function RootNavigation() {
   return (
@@ -38,8 +86,19 @@ export default function RootNavigation() {
           }}
         />
         <Stack.Screen
-          name="Notify"
-          component={Notify}
+          name="Adicionar Tarefa"
+          component={AddTaskScreen}
+          options={{
+            headerShown: true,
+            headerStyle: {
+              backgroundColor: "#000",
+            },
+            headerTintColor: "#fff",
+          }}
+        />
+        <Stack.Screen
+          name="Editar Tarefa"
+          component={EditTaskScreen}
           options={{
             headerShown: true,
             headerStyle: {
@@ -50,39 +109,5 @@ export default function RootNavigation() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-}
-
-const tabs = createMaterialBottomTabNavigator();
-
-function TabsNavigation() {
-  return (
-    <tabs.Navigator>
-      <tabs.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={"#782DE3"} size={26} />
-          ),
-        }}
-      />
-      <tabs.Screen
-        name="Notify"
-        component={Notify}
-        options={{
-          tabBarLabel: "Notify",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="bell-alert"
-              color={"#782DE3"}
-              size={26}
-            />
-          ),
-        }}
-      />
-
-    </tabs.Navigator>
   );
 }
